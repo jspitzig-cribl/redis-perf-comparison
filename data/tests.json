@@ -1,0 +1,596 @@
+[
+  {
+    "name": "set test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "get test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "get",
+        "arguments": ["key1"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "get nonexistent test",
+    "instructions": [
+      {
+        "command": "get",
+        "arguments": ["nonExistent"]
+      }
+    ]
+  },{
+    "name": "positive exists test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "exists",
+        "arguments": ["key1"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "negative exists test",
+    "instructions": [
+      {
+        "command": "exists",
+        "arguments": ["nonExistent"]
+      }
+    ]
+  },{
+    "name": "array exists test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "exists",
+        "arguments": ["key1", "nonExistent"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "incr test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "incr",
+        "arguments": ["key1"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "decr test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "decr",
+        "arguments": ["key1"]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "incr by test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "incrby",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "decr by test",
+    "setupInstructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "instructions": [
+      {
+        "command": "decrby",
+        "arguments": ["key1", 5]
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "del test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      },{
+        "command": "del",
+        "arguments": ["key1"]
+      }
+    ]
+  },{
+    "name": "del array test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", 5]
+      },{
+        "command": "set",
+        "arguments": ["key2", 5]
+      },{
+        "command": "del",
+        "arguments": ["key1", "key2"]
+      }
+    ]
+  },{
+    "name": "hset test",
+    "instructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hget test",
+    "setupInstructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "instructions": [
+      {
+        "command": "hget",
+        "arguments": ["hashKey", "field1"] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hexists test",
+    "setupInstructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "instructions": [
+      {
+        "command": "hexists",
+        "arguments": ["hashKey", "field1"] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hincrby test",
+    "setupInstructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "instructions": [
+      {
+        "command": "hincrby",
+        "arguments": ["hashKey", "field2", 5] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hkeys test",
+    "setupInstructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "instructions": [
+      {
+        "command": "hkeys",
+        "arguments": ["hashKey"] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hvals test",
+    "setupInstructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      }
+    ],
+    "instructions": [
+      {
+        "command": "hvals",
+        "arguments": ["hashKey"] 
+      }
+    ],
+    "cleanupInstructions": [
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "hdel test",
+    "instructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1"] 
+      },
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1"] 
+      }
+    ]
+  },{
+    "name": "hdel array test",
+    "instructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5] 
+      },{
+        "command": "hdel",
+        "arguments": ["hashKey", "field1", "field2"] 
+      }
+    ]
+  },{
+    "name": "echo array test",
+    "instructions": [
+      {
+        "command": "echo",
+        "arguments": ["This is the message!!!!"] 
+      }
+    ]
+  },{
+    "name": "expire test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["keyToExpire", "Useless Value"] 
+      },{
+        "command": "expire",
+        "arguments": ["keyToExpire", "100"] 
+      },{
+        "command": "ttl",
+        "arguments": ["keyToExpire"]
+      },{
+        "command": "persist",
+        "arguments": ["keyToExpire"]
+      }
+    ]
+  },{
+    "name": "ping test",
+    "instructions": [
+      {
+        "command": "ping",
+        "arguments": [] 
+      }
+    ]
+  },{
+    "name": "basic commands test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      },
+      {
+        "command": "set",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "get",
+        "arguments": ["key1"]
+      },
+      {
+        "command": "exists",
+        "arguments": ["key1"]
+      },
+      {
+        "command": "incr",
+        "arguments": ["key2"]
+      },
+      {
+        "command": "decr",
+        "arguments": ["key2"]
+      },
+      {
+        "command": "incrby",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "decrby",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "del",
+        "arguments": ["key1", "key2"]
+      }
+    ]
+  },{
+    "name": "hash commands test",
+    "instructions": [
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5]
+      },
+      {
+        "command": "hget",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hexists",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hincrby",
+        "arguments": ["hashKey", "field2", 5]
+      },
+      {
+        "command": "hkeys",
+        "arguments": ["hashKey"]
+      },
+      {
+        "command": "hvals",
+        "arguments": ["hashKey"]
+      },
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "otherKey", "someValue"]
+      },
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field2", "otherKey"]
+      }
+    ]
+  },{
+    "name": "other commands test",
+    "instructions": [
+      {
+        "command": "echo",
+        "arguments": ["This is the message!!!!"]
+      },
+      {
+        "command": "set",
+        "arguments": ["keyToExpire", "Useless Value"]
+      },
+      {
+        "command": "expire",
+        "arguments": ["keyToExpire", 100]
+      },
+      {
+        "command": "ttl",
+        "arguments": ["keyToExpire"]
+      },
+      {
+        "command": "persist",
+        "arguments": ["keyToExpire"]
+      },
+      {
+        "command": "del",
+        "arguments": ["keyToExpire"]
+      }
+    ]
+  },{
+    "name": "combined test",
+    "instructions": [
+      {
+        "command": "set",
+        "arguments": ["key1", "value1"]
+      },
+      {
+        "command": "get",
+        "arguments": ["key1"]
+      },
+      {
+        "command": "get",
+        "arguments": ["nonExistent"]
+      },
+      {
+        "command": "exists",
+        "arguments": ["key1"]
+      },
+      {
+        "command": "exists",
+        "arguments": ["nonExistent"]
+      },
+      {
+        "command": "exists",
+        "arguments": ["key1", "nonExistent"]
+      },
+      {
+        "command": "set",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "incr",
+        "arguments": ["key2"]
+      },
+      {
+        "command": "decr",
+        "arguments": ["key2"]
+      },
+      {
+        "command": "incrby",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "decrby",
+        "arguments": ["key2", 5]
+      },
+      {
+        "command": "del",
+        "arguments": ["key1"]
+      },
+      {
+        "command": "set",
+        "arguments": ["otherKey", "someValue"]
+      },
+      {
+        "command": "del",
+        "arguments": ["key2", "otherKey"]
+      },
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "field1", "value1", "field2", 5]
+      },
+      {
+        "command": "hget",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hexists",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hincrby",
+        "arguments": ["hashKey", "field2", 5]
+      },
+      {
+        "command": "hkeys",
+        "arguments": ["hashKey"]
+      },
+      {
+        "command": "hvals",
+        "arguments": ["hashKey"]
+      },
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field1"]
+      },
+      {
+        "command": "hset",
+        "arguments": ["hashKey", "otherKey", "someValue"]
+      },
+      {
+        "command": "hdel",
+        "arguments": ["hashKey", "field2", "otherKey"]
+      },
+      {
+        "command": "echo",
+        "arguments": ["This is the message!!!!"]
+      },
+      {
+        "command": "set",
+        "arguments": ["keyToExpire", "Useless Value"]
+      },
+      {
+        "command": "expire",
+        "arguments": ["keyToExpire", 100]
+      },
+      {
+        "command": "ttl",
+        "arguments": ["keyToExpire"]
+      },
+      {
+        "command": "persist",
+        "arguments": ["keyToExpire"]
+      },
+      {
+        "command": "del",
+        "arguments": ["keyToExpire"]
+      }
+    ]
+  }
+]
